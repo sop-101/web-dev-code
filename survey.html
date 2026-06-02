@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="tl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Barangay 123 Disaster Preparedness Survey</title>
+    <link rel="stylesheet" href="survey.css" />
+    <base target="_blank" />
+  </head>
+  <body>
+    <div class="survey-container">
+      <div class="header-section">
+        <h1>SURVEY SA PAGHAHANDA SA SAKUNA</h1>
+        <p class="purpose-text">
+          Layunin: Ang survey na ito ay naglalayong malaman ang antas ng
+          paghahanda ng mga mamamayan sa iba't ibang sakuna tulad ng bagyo,
+          baha, lindol, at sunog.
+        </p>
+      </div>
+
+      <form id="surveyForm" action="#" method="POST">
+        <!-- SECTION I -->
+        <h3>I. Impormasyon ng Respondente</h3>
+
+        <div class="form-group">
+          <label>Buong Pangalan:</label>
+          <input
+            type="text"
+            name="buong_pangalan"
+            placeholder="Juan Dela Cruz"
+            required
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Edad:</label>
+          <input type="number" name="edad" min="1" max="120" required />
+        </div>
+
+        <div class="form-group">
+          <label>Kasarian:</label>
+          <label class="option-group"
+            ><input type="radio" name="kasarian" value="lalaki" required />
+            Lalaki</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="kasarian" value="babae" /> Babae</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="kasarian" value="iba" /> Iba pa / Mas
+            pipiliing huwag sabihin</label
+          >
+        </div>
+
+        <div class="form-group">
+          <label
+            >Ilan kayo sa pamilya ang magkakasama sa bahay? (Kasama ka)</label
+          >
+          <input type="number" name="bilang_ng_pamilya" min="1" required />
+        </div>
+
+        <div class="form-group">
+          <label>Address/Sitio/Barangay:</label>
+          <input type="text" name="address" required />
+        </div>
+
+        <!-- SECTION II -->
+        <h3>II. Kaalaman sa Panganib</h3>
+
+        <div class="form-group">
+          <label
+            >1. Ano ang mga natural na sakuna na madalas mangyari sa inyong
+            barangay?</label
+          >
+          <label class="option-group"
+            ><input type="checkbox" name="sakuna" value="baha" /> Baha</label
+          >
+          <label class="option-group"
+            ><input type="checkbox" name="sakuna" value="bagyo" /> Bagyo</label
+          >
+          <label class="option-group"
+            ><input type="checkbox" name="sakuna" value="lindol" />
+            Lindol</label
+          >
+          <label class="option-group"
+            ><input type="checkbox" name="sakuna" value="sunog" /> Sunog</label
+          >
+        </div>
+
+        <div class="form-group">
+          <label>2. Alam mo ba ang mga panganib sa inyong bahay?</label>
+          <label class="option-group"
+            ><input type="radio" name="kaalaman_panganib" value="oo" required />
+            Oo</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="kaalaman_panganib" value="hindi" />
+            Hindi</label
+          >
+        </div>
+
+        <!-- SECTION III -->
+        <h3>III. Pagpaplano at Paghahanda</h3>
+
+        <div class="form-group">
+          <label>3. Mayroon bang nakahandang "First Aid Kit"?</label>
+          <label class="option-group"
+            ><input type="radio" name="gobag" value="oo" required />
+            Meron</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="gobag" value="hindi" /> Wala</label
+          >
+        </div>
+
+        <div class="form-group">
+          <label>4. May listahan ba kayo ng emergency contact numbers?</label>
+          <label class="option-group"
+            ><input
+              type="radio"
+              name="emergency_contacts"
+              value="oo"
+              required
+            />
+            Oo</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="emergency_contacts" value="wala" />
+            Wala</label
+          >
+        </div>
+
+        <div class="form-group">
+          <label
+            >5. Madali ba kayong makakaalis sa bahay kung may biglaang
+            sakuna?</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="evacuation_ease" value="oo" required />
+            Oo</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="evacuation_ease" value="hindi" />
+            Hindi</label
+          >
+        </div>
+
+        <!-- SECTION IV -->
+        <h3>IV. Health Records Module (Para sa Buong Pamilya)</h3>
+
+        <div class="form-group">
+          <label>Ilang miyembro ng pamilya ang ilalagay sa record?</label>
+          <input
+            type="number"
+            name="total_members"
+            min="1"
+            placeholder="Halimbawa: 4"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Pangalan ng Head / Representative:</label>
+          <input type="text" name="family_head" placeholder="Juan Dela Cruz" />
+        </div>
+
+        <hr />
+
+        <div class="form-group">
+          <label>Blood Pressure (optional):</label>
+          <input type="text" name="bp" placeholder="Halimbawa: 120/80" />
+        </div>
+
+        <div class="form-group">
+          <label>Mayroon bang existing illness ang pamilya?</label>
+          <textarea
+            name="existing_illness"
+            rows="2"
+            placeholder="Halimbawa: Asthma, Diabetes, Hypertension"
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>May miyembro ba ng pamilya na may disability?</label>
+          <label class="option-group"
+            ><input type="radio" name="disability" value="oo" /> Oo</label
+          >
+          <label class="option-group"
+            ><input type="radio" name="disability" value="wala" /> Wala</label
+          >
+        </div>
+
+        <div class="form-group">
+          <label>Kung meron, ilarawan:</label>
+          <input
+            type="text"
+            name="disability_details"
+            placeholder="Halimbawa: Wheelchair user, hearing impaired"
+          />
+        </div>
+
+        <div class="form-group">
+          <label>Mga iniinom na gamot (kung meron):</label>
+          <textarea
+            name="medication"
+            rows="2"
+            placeholder="Isulat ang maintenance meds..."
+          ></textarea>
+        </div>
+
+        <!-- SECTION V -->
+        <h3>V. Rekomendasyon</h3>
+
+        <div class="form-group">
+          <label>Mungkahi para sa pagpapabuti ng paghahanda:</label>
+          <textarea
+            name="mungkahi"
+            rows="4"
+            placeholder="Isulat ang iyong mungkahi dito..."
+          ></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          Submit Survey
+        </button>
+      </form>
+    </div>
+
+    <!-- ===== SUCCESS MODAL ===== -->
+    <div class="modal-overlay" id="successModal">
+      <div class="modal-wrapper">
+        <div class="modal-box">
+          <div class="modal-header">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-icon"></div>
+            <h2 class="modal-title">Salamat sa Pagsagot!</h2>
+          </div>
+          <div class="modal-body">
+            <p class="modal-message">
+              Matagumpay mong nakumpleto ang survey.<br />
+              Ang iyong impormasyon ay na-save sa aming system.
+            </p>
+            <div class="modal-survey-count" id="surveyCount">
+              Total na surveys: <span id="totalCount">0</span>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button class="modal-btn" id="homeBtn">BUMALIK SA HOMEPAGE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("surveyForm");
+      const submitBtn = document.getElementById("submitBtn");
+      const successModal = document.getElementById("successModal");
+      const modalClose = document.getElementById("modalClose");
+      const homeBtn = document.getElementById("homeBtn");
+      const totalCount = document.getElementById("totalCount");
+
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+
+        // Disable button while submitting
+        submitBtn.disabled = true;
+        submitBtn.textContent = " Nagsa-save...";
+
+        const formData = new FormData(this);
+        let data = {};
+
+        // Collect all form data - handle checkboxes properly
+        const checkboxes = ["sakuna"];
+
+        formData.forEach((value, key) => {
+          if (checkboxes.includes(key)) {
+            if (!data[key]) {
+              data[key] = [];
+            }
+            data[key].push(value);
+          } else {
+            data[key] = value;
+          }
+        });
+
+        // Add timestamp
+        data.timestamp = new Date().toISOString();
+
+        // Save to localStorage
+        let surveys = JSON.parse(localStorage.getItem("surveys")) || [];
+        surveys.push(data);
+        localStorage.setItem("surveys", JSON.stringify(surveys));
+
+        // Update survey count in modal
+        totalCount.textContent = surveys.length;
+
+        // Show styled modal
+        successModal.classList.add("active");
+
+        // Reset button
+        submitBtn.disabled = false;
+        submitBtn.textContent = " Submit Survey";
+
+        // Reset form
+        form.reset();
+      });
+
+      // Close modal on X button
+      modalClose.addEventListener("click", function () {
+        successModal.classList.remove("active");
+      });
+
+      // Close modal on overlay click
+      successModal.addEventListener("click", function (e) {
+        if (e.target === successModal) {
+          successModal.classList.remove("active");
+        }
+      });
+
+      // Go to homepage
+      homeBtn.addEventListener("click", function () {
+        window.location.href = "homepage.html";
+      });
+    </script>
+  </body>
+</html>
