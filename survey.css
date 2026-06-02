@@ -1,0 +1,272 @@
+/* Base Styles from Dashboard */
+:root {
+  --primary-blue: #2c3e50;
+  --accent-red: #e74c3c;
+  --light-bg: #f4f7f6;
+  --white: #ffffff;
+  --text-dark: #333;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  margin: 0;
+  padding: 20px;
+  color: var(--text-dark);
+  line-height: 1.6;
+}
+
+/* Survey Container */
+.survey-container {
+  max-width: 800px;
+  margin: 40px auto;
+  background: var(--white);
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  border-top: 10px solid var(--accent-red);
+}
+
+.header-section {
+  text-align: center;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 20px;
+}
+
+h1 {
+  color: var(--primary-blue);
+  font-size: 24px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.purpose-text {
+  font-style: italic;
+  color: #666;
+  font-size: 0.95rem;
+}
+
+/* Form Styling */
+h3 {
+  color: var(--white);
+  background: var(--primary-blue);
+  padding: 10px 15px;
+  border-radius: 4px;
+  font-size: 18px;
+  margin-top: 30px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+  padding: 10px 0;
+}
+
+label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 8px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="number"],
+textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+input:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--accent-red);
+  box-shadow: 0 0 5px rgba(231, 76, 60, 0.2);
+}
+
+/* Radio & Checkbox Styling */
+.option-group {
+  display: block;
+  margin-bottom: 8px;
+  cursor: pointer;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+  margin-right: 10px;
+  transform: scale(1.2);
+  accent-color: var(--accent-red);
+}
+
+hr {
+  border: 0;
+  height: 1px;
+  background: #eee;
+  margin: 30px 0;
+}
+
+/* Submit Button */
+.submit-btn {
+  background-color: var(--accent-red);
+  color: white;
+  padding: 15px 30px;
+  border: none;
+  border-radius: 5px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  background-color: #c0392b;
+}
+
+/* ===== SUCCESS MODAL ===== */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-box {
+  background: white;
+  padding: 0;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 420px;
+  width: 90%;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  animation: slideUp 0.4s ease;
+}
+
+.modal-header {
+  background: #27ae60;
+  padding: 30px 20px;
+  color: white;
+}
+
+.modal-icon {
+  font-size: 60px;
+  margin-bottom: 10px;
+}
+
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin: 0;
+}
+
+.modal-body {
+  padding: 25px 30px;
+}
+
+.modal-message {
+  color: #7f8c8d;
+  font-size: 15px;
+  margin-bottom: 5px;
+  line-height: 1.5;
+}
+
+.modal-survey-count {
+  color: #2c3e50;
+  font-size: 14px;
+  font-weight: 600;
+  margin-top: 15px;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 6px;
+}
+
+.modal-footer {
+  padding: 0 30px 30px 30px;
+}
+
+.modal-btn {
+  background: #27ae60;
+  color: white;
+  padding: 14px 24px;
+  border: none;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  transition: background 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.modal-btn:hover {
+  background: #219a52;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
+  opacity: 0.8;
+  transition: opacity 0.2s;
+}
+
+.modal-close:hover {
+  opacity: 1;
+}
+
+.modal-wrapper {
+  position: relative;
+}
+
+@media (max-width: 600px) {
+  .survey-container {
+    padding: 20px;
+    margin: 10px;
+  }
+  .modal-box {
+    width: 95%;
+  }
+}
