@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="tl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login - Brgy 727 System</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+
+  <body>
+    <div class="login-box">
+      <h2>Admin Login</h2>
+      <p class="login-subtitle">
+        <strong>puwedeng mag-log in ay mga opisyal ng barangay lamang. </strong>
+      </p>
+
+      <div class="input-group">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Enter username" />
+      </div>
+
+      <div class="input-group">
+        <label>Password</label>
+        <input type="password" id="password" placeholder="Enter password" />
+      </div>
+
+      <button class="login-btn" onclick="login()">Login</button>
+
+      <a href="homepage.html" class="back-btn">Back to Homepage</a>
+
+      <div class="footer-text">Brgy 727 Monitoring System</div>
+    </div>
+
+    <!--  POPUP -->
+
+    <div class="popup" id="popup">
+      <div class="popup-content">
+        <div class="popup-icon" id="popup-icon">✔</div>
+
+        <h2 id="popup-title">Success</h2>
+
+        <p id="popup-message"></p>
+
+        <button onclick="closePopup()">OK</button>
+      </div>
+    </div>
+
+    <!-- javascript -->
+    <script>
+      // ENTER KEY SUPPORT
+      document.addEventListener("keydown", function (event) {
+        if (event.key === "Enter") {
+          login();
+        }
+      });
+
+      function showPopup(message, type) {
+        const popup = document.getElementById("popup");
+        const popupTitle = document.getElementById("popup-title");
+        const popupMessage = document.getElementById("popup-message");
+        const popupIcon = document.getElementById("popup-icon");
+
+        popup.style.display = "flex";
+        popupMessage.innerText = message;
+
+        if (type === "success") {
+          popupTitle.innerText = "Success";
+          popupIcon.innerHTML = "✔";
+          popupIcon.style.background = "#22c55e";
+        } else {
+          popupTitle.innerText = "Error";
+          popupIcon.innerHTML = "✖";
+          popupIcon.style.background = "#ef4444";
+        }
+      }
+
+      function closePopup() {
+        document.getElementById("popup").style.display = "none";
+      }
+
+      function login() {
+        const user = document.getElementById("username").value.trim();
+        const pass = document.getElementById("password").value.trim();
+
+        const adminUser = "admin";
+        const adminPass = "1234";
+
+        // EMPTY FIELDS
+        if (user === "" || pass === "") {
+          showPopup(
+            "Pakilagay ang username at password bago mag-login.",
+            "error",
+          );
+          return;
+        }
+
+        //KAPAG WRONG CREDENTIALS
+        if (user !== adminUser || pass !== adminPass) {
+          showPopup("Mali ang username o password!", "error");
+          return;
+        }
+
+        // SUCCESS LOGIN
+        localStorage.setItem("adminLoggedIn", "true");
+
+        showPopup("Matagumpay ang pag-login!", "success");
+
+        setTimeout(() => {
+          window.location.href = "dashboard.html";
+        }, 2000);
+      }
+    </script>
+  </body>
+</html>
