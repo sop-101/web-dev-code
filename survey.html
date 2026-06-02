@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="tl">
   <head>
     <meta charset="UTF-8" />
@@ -19,133 +19,170 @@
       </div>
 
       <form id="surveyForm" action="#" method="POST">
-        <!-- SECTION I -->
         <h3>I. Impormasyon ng Respondente</h3>
 
-        <div class="form-group">
-          <label>Buong Pangalan:</label>
-          <input
-            type="text"
-            name="buong_pangalan"
-            placeholder="Juan Dela Cruz"
-            required
-          />
+        <div class="form-row">
+          <div class="form-group">
+            <label>First Name:</label>
+            <input
+              type="text"
+              name="first_name"
+              placeholder="First Name"
+              pattern="[A-Za-z ]+"
+              title="Mga letra lamang (A-Z, a-z) ang pinapayagan."
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Middle Name:</label>
+            <input
+              type="text"
+              name="middle_name"
+              placeholder="Middle Name"
+              pattern="[A-Za-z ]+"
+              title="Mga letra lamang (A-Z, a-z) ang pinapayagan."
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Last Name:</label>
+            <input
+              type="text"
+              name="last_name"
+              placeholder="Last Name"
+              pattern="[A-Za-z ]+"
+              title="Mga letra lamang (A-Z, a-z) ang pinapayagan."
+              required
+            />
+          </div>
         </div>
 
         <div class="form-group">
           <label>Edad:</label>
-          <input type="number" name="edad" min="1" max="120" required />
+          <input type="number" name="edad" min="13" max="120" required />
         </div>
 
         <div class="form-group">
           <label>Kasarian:</label>
-          <label class="option-group"
-            ><input type="radio" name="kasarian" value="lalaki" required />
-            Lalaki</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="kasarian" value="babae" /> Babae</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="kasarian" value="iba" /> Iba pa / Mas
-            pipiliing huwag sabihin</label
-          >
+          <label class="option-group">
+            <input type="radio" name="kasarian" value="lalaki" required /> Lalaki
+          </label>
+          <label class="option-group">
+            <input type="radio" name="kasarian" value="babae" /> Babae
+          </label>
+          <label class="option-group">
+            <input type="radio" name="kasarian" value="iba" /> Iba pa / Mas pipiliing huwag sabihin
+          </label>
         </div>
 
         <div class="form-group">
-          <label
-            >Ilan kayo sa pamilya ang magkakasama sa bahay? (Kasama ka)</label
-          >
-          <input type="number" name="bilang_ng_pamilya" min="1" required />
+          <label>Ilan kayo sa pamilya ang magkakasama sa bahay? (Kasama ka)</label>
+          <input type="number" name="bilang_ng_pamilya" min="1" max="50" required />
         </div>
 
-        <div class="form-group">
-          <label>Address/Sitio/Barangay:</label>
-          <input type="text" name="address" required />
+        <div class="address-group">
+          <div class="address-toggle" id="addressToggle">
+            <span>Address</span>
+            <span class="arrow">▼</span>
+          </div>
+          <div class="address-fields" id="addressFields">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Block:</label>
+                <input type="text" name="block" id="blockInput" placeholder="Blk / Block No." />
+                <label class="na-checkbox-label">
+                  <input type="checkbox" id="blockNA" /> N/A (Walang Block)
+                </label>
+              </div>
+              <div class="form-group">
+                <label>Lot:</label>
+                <input type="text" name="lot" id="lotInput" placeholder="Lt / Lot No." />
+                <label class="na-checkbox-label">
+                  <input type="checkbox" id="lotNA" /> N/A (Walang Lot)
+                </label>
+              </div>
+            </div>
+            
+            <div class="form-group" style="margin-top: 10px;">
+              <label>Street:</label>
+              <input type="text" name="street" placeholder="Street Name (e.g., Maganda St.)" required />
+            </div>
+            
+            <div class="form-row" style="margin-top: 10px;">
+              <div class="form-group">
+                <label>Barangay:</label>
+                <input type="text" name="barangay" placeholder="Barangay" required />
+              </div>
+              <div class="form-group">
+                <label>City:</label>
+                <input type="text" name="city" placeholder="City / Municipality" required />
+              </div>
+            </div>
+          </div>
         </div>
 
-        <!-- SECTION II -->
         <h3>II. Kaalaman sa Panganib</h3>
 
         <div class="form-group">
-          <label
-            >1. Ano ang mga natural na sakuna na madalas mangyari sa inyong
-            barangay?</label
-          >
-          <label class="option-group"
-            ><input type="checkbox" name="sakuna" value="baha" /> Baha</label
-          >
-          <label class="option-group"
-            ><input type="checkbox" name="sakuna" value="bagyo" /> Bagyo</label
-          >
-          <label class="option-group"
-            ><input type="checkbox" name="sakuna" value="lindol" />
-            Lindol</label
-          >
-          <label class="option-group"
-            ><input type="checkbox" name="sakuna" value="sunog" /> Sunog</label
-          >
+          <label>1. Ano ang mga natural na sakuna na madalas mangyari sa inyong barangay?</label>
+          <label class="option-group">
+            <input type="checkbox" name="sakuna" value="baha" /> Baha
+          </label>
+          <label class="option-group">
+            <input type="checkbox" name="sakuna" value="bagyo" /> Bagyo
+          </label>
+          <label class="option-group">
+            <input type="checkbox" name="sakuna" value="lindol" /> Lindol
+          </label>
+          <label class="option-group">
+            <input type="checkbox" name="sakuna" value="sunog" /> Sunog
+          </label>
         </div>
 
         <div class="form-group">
           <label>2. Alam mo ba ang mga panganib sa inyong bahay?</label>
-          <label class="option-group"
-            ><input type="radio" name="kaalaman_panganib" value="oo" required />
-            Oo</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="kaalaman_panganib" value="hindi" />
-            Hindi</label
-          >
+          <label class="option-group">
+            <input type="radio" name="kaalaman_panganib" value="oo" required /> Oo
+          </label>
+          <label class="option-group">
+            <input type="radio" name="kaalaman_panganib" value="hindi" /> Hindi
+          </label>
         </div>
 
-        <!-- SECTION III -->
         <h3>III. Pagpaplano at Paghahanda</h3>
 
         <div class="form-group">
           <label>3. Mayroon bang nakahandang "First Aid Kit"?</label>
-          <label class="option-group"
-            ><input type="radio" name="gobag" value="oo" required />
-            Meron</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="gobag" value="hindi" /> Wala</label
-          >
+          <label class="option-group">
+            <input type="radio" name="gobag" value="oo" required /> Meron
+          </label>
+          <label class="option-group">
+            <input type="radio" name="gobag" value="hindi" /> Wala
+          </label>
         </div>
 
         <div class="form-group">
           <label>4. May listahan ba kayo ng emergency contact numbers?</label>
-          <label class="option-group"
-            ><input
-              type="radio"
-              name="emergency_contacts"
-              value="oo"
-              required
-            />
-            Oo</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="emergency_contacts" value="wala" />
-            Wala</label
-          >
+          <label class="option-group">
+            <input type="radio" name="emergency_contacts" value="oo" required /> Oo
+          </label>
+          <label class="option-group">
+            <input type="radio" name="emergency_contacts" value="wala" /> Wala
+          </label>
         </div>
 
         <div class="form-group">
-          <label
-            >5. Madali ba kayong makakaalis sa bahay kung may biglaang
-            sakuna?</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="evacuation_ease" value="oo" required />
-            Oo</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="evacuation_ease" value="hindi" />
-            Hindi</label
-          >
+          <label>5. Madali ba kayong makakaalis sa bahay kung may biglaang sakuna?</label>
+          <label class="option-group">
+            <input type="radio" name="evacuation_ease" value="oo" required /> Oo
+          </label>
+          <label class="option-group">
+            <input type="radio" name="evacuation_ease" value="hindi" /> Hindi
+          </label>
         </div>
 
-        <!-- SECTION IV -->
         <h3>IV. Health Records Module (Para sa Buong Pamilya)</h3>
 
         <div class="form-group">
@@ -154,13 +191,20 @@
             type="number"
             name="total_members"
             min="1"
+            max="50"
             placeholder="Halimbawa: 4"
           />
         </div>
 
         <div class="form-group">
           <label>Pangalan ng Head / Representative:</label>
-          <input type="text" name="family_head" placeholder="Juan Dela Cruz" />
+          <input 
+            type="text" 
+            name="family_head" 
+            placeholder="Juan Dela Cruz" 
+            pattern="[A-Za-z ]+"
+            title="Mga letra lamang (A-Z, a-z) ang pinapayagan."
+          />
         </div>
 
         <hr />
@@ -172,30 +216,58 @@
 
         <div class="form-group">
           <label>Mayroon bang existing illness ang pamilya?</label>
-          <textarea
-            name="existing_illness"
-            rows="2"
-            placeholder="Halimbawa: Asthma, Diabetes, Hypertension"
-          ></textarea>
+          <div class="checkbox-grid">
+            <label><input type="checkbox" name="existing_illness" value="asthma" /> Asthma</label>
+            <label><input type="checkbox" name="existing_illness" value="diabetes" /> Diabetes</label>
+            <label><input type="checkbox" name="existing_illness" value="hypertension" /> Hypertension</label>
+            <label><input type="checkbox" name="existing_illness" value="heart_disease" /> Heart Disease</label>
+            <label><input type="checkbox" name="existing_illness" value="tuberculosis" /> Tuberculosis</label>
+            <label><input type="checkbox" name="existing_illness" value="cancer" /> Cancer</label>
+            <label><input type="checkbox" name="existing_illness" value="kidney_disease" /> Kidney Disease</label>
+            <label><input type="checkbox" name="existing_illness" value="mental_illness" /> Mental Illness</label>
+            <label><input type="checkbox" name="existing_illness" value="none" /> Wala / None</label>
+            <label><input type="checkbox" name="existing_illness" value="other" id="illnessOtherCheck" /> Iba pa (Other)</label>
+          </div>
+          <div class="other-input" id="illnessOtherInput">
+            <input type="text" name="illness_other" placeholder="Ilarawan ang iba pang sakit..." />
+          </div>
         </div>
 
         <div class="form-group">
-          <label>May miyembro ba ng pamilya na may disability?</label>
-          <label class="option-group"
-            ><input type="radio" name="disability" value="oo" /> Oo</label
-          >
-          <label class="option-group"
-            ><input type="radio" name="disability" value="wala" /> Wala</label
-          >
+          <label>May miyembro ba ng pamilya na may disability / kapansanan?</label>
+          <label class="option-group">
+            <input type="radio" name="disability" value="oo" id="disabilityYes" /> Oo
+          </label>
+          <label class="option-group">
+            <input type="radio" name="disability" value="wala" id="disabilityNo" /> Wala
+          </label>
         </div>
 
-        <div class="form-group">
-          <label>Kung meron, ilarawan:</label>
-          <input
-            type="text"
-            name="disability_details"
-            placeholder="Halimbawa: Wheelchair user, hearing impaired"
-          />
+        <div class="disability-details-section" id="disabilityDetailsSection">
+          <div class="form-group">
+            <label>Piliin ang uri ng kapansanan:</label>
+            <select name="disability_type" id="disabilitySelect">
+              <option value="" disabled selected>-- Pumili ng Kapansanan --</option>
+              <option value="visual">Visual Disability (Bulag / Malabo ang Paningin)</option>
+              <option value="hearing">Hearing Disability (Bingi / Mahina ang Pandinig)</option>
+              <option value="speech">Speech/Language Impairment (Pipi / Hirap Magsalita)</option>
+              <option value="physical">Physical/Orthopedic Disability (Lumpo / Hirap Kumilos)</option>
+              <option value="intellectual">Intellectual Disability (Kakulangan sa Pag-iisip)</option>
+              <option value="learning">Learning Disability (Dyslexia / ADHD, atbp.)</option>
+              <option value="psychosocial">Psychosocial Disability (Depression, Anxiety, atbp.)</option>
+              <option value="chronic_illness">Disability due to Chronic Illness (Sakit na Naglilimita sa Kilos)</option>
+              <option value="other">Iba pa (Other Disability)</option>
+            </select>
+          </div>
+          
+          <div class="other-input" id="disabilityOtherInput">
+            <label>Ilarawan ang iba pang kapansanan:</label>
+            <input
+              type="text"
+              name="disability_other_details"
+              placeholder="I-type dito ang uri ng kapansanan..."
+            />
+          </div>
         </div>
 
         <div class="form-group">
@@ -207,7 +279,6 @@
           ></textarea>
         </div>
 
-        <!-- SECTION V -->
         <h3>V. Rekomendasyon</h3>
 
         <div class="form-group">
@@ -224,7 +295,6 @@
       </form>
     </div>
 
-    <!-- ===== SUCCESS MODAL ===== -->
     <div class="modal-overlay" id="successModal">
       <div class="modal-wrapper">
         <div class="modal-box">
@@ -257,8 +327,106 @@
       const homeBtn = document.getElementById("homeBtn");
       const totalCount = document.getElementById("totalCount");
 
+      // Address toggle functionality
+      const addressToggle = document.getElementById("addressToggle");
+      const addressFields = document.getElementById("addressFields");
+
+      addressToggle.addEventListener("click", function() {
+        this.classList.toggle("active");
+        addressFields.classList.toggle("active");
+      });
+
+      // Block and Lot N/A Logic
+      const blockInput = document.getElementById("blockInput");
+      const blockNA = document.getElementById("blockNA");
+      const lotInput = document.getElementById("lotInput");
+      const lotNA = document.getElementById("lotNA");
+
+      blockNA.addEventListener("change", function() {
+        if (this.checked) {
+          blockInput.value = "N/A";
+          blockInput.disabled = true;
+        } else {
+          blockInput.value = "";
+          blockInput.disabled = false;
+        }
+      });
+
+      lotNA.addEventListener("change", function() {
+        if (this.checked) {
+          lotInput.value = "N/A";
+          lotInput.disabled = true;
+        } else {
+          lotInput.value = "";
+          lotInput.disabled = false;
+        }
+      });
+
+      // Illness "Other" toggle
+      const illnessOtherCheck = document.getElementById("illnessOtherCheck");
+      const illnessOtherInput = document.getElementById("illnessOtherInput");
+
+      illnessOtherCheck.addEventListener("change", function() {
+        illnessOtherInput.classList.toggle("active", this.checked);
+      });
+
+      // "None" checkbox logic - uncheck others if "None" is selected
+      const illnessCheckboxes = document.querySelectorAll('input[name="existing_illness"]');
+      const noneCheckbox = document.querySelector('input[name="existing_illness"][value="none"]');
+
+      illnessCheckboxes.forEach(cb => {
+        cb.addEventListener("change", function() {
+          if (this === noneCheckbox && this.checked) {
+            illnessCheckboxes.forEach(other => {
+              if (other !== noneCheckbox) other.checked = false;
+            });
+            illnessOtherInput.classList.remove("active");
+          } else if (this !== noneCheckbox && this.checked) {
+            noneCheckbox.checked = false;
+          }
+        });
+      });
+
+      // Dynamic Disability Logic
+      const disabilityYes = document.getElementById("disabilityYes");
+      const disabilityNo = document.getElementById("disabilityNo");
+      const disabilityDetailsSection = document.getElementById("disabilityDetailsSection");
+      const disabilitySelect = document.getElementById("disabilitySelect");
+      const disabilityOtherInput = document.getElementById("disabilityOtherInput");
+
+      disabilityYes.addEventListener("change", function() {
+        if (this.checked) {
+          disabilityDetailsSection.classList.add("active");
+          disabilitySelect.required = true;
+        }
+      });
+
+      disabilityNo.addEventListener("change", function() {
+        if (this.checked) {
+          disabilityDetailsSection.classList.remove("active");
+          disabilitySelect.required = false;
+          disabilitySelect.selectedIndex = 0;
+          disabilityOtherInput.classList.remove("active");
+          disabilityOtherInput.querySelector('input').value = "";
+        }
+      });
+
+      disabilitySelect.addEventListener("change", function() {
+        if (this.value === "other") {
+          disabilityOtherInput.classList.add("active");
+          disabilityOtherInput.querySelector('input').required = true;
+        } else {
+          disabilityOtherInput.classList.remove("active");
+          disabilityOtherInput.querySelector('input').required = false;
+        }
+      });
+
       form.addEventListener("submit", function (e) {
         e.preventDefault();
+
+        // Temporarily enable inputs to ensure FormData captures "N/A" values
+        blockInput.disabled = false;
+        lotInput.disabled = false;
 
         // Disable button while submitting
         submitBtn.disabled = true;
@@ -268,7 +436,7 @@
         let data = {};
 
         // Collect all form data - handle checkboxes properly
-        const checkboxes = ["sakuna"];
+        const checkboxes = ["sakuna", "existing_illness"];
 
         formData.forEach((value, key) => {
           if (checkboxes.includes(key)) {
@@ -299,8 +467,15 @@
         submitBtn.disabled = false;
         submitBtn.textContent = " Submit Survey";
 
-        // Reset form
+        // Reset form and UI element states
         form.reset();
+        blockInput.disabled = false;
+        lotInput.disabled = false;
+        addressFields.classList.remove("active");
+        addressToggle.classList.remove("active");
+        illnessOtherInput.classList.remove("active");
+        disabilityDetailsSection.classList.remove("active");
+        disabilityOtherInput.classList.remove("active");
       });
 
       // Close modal on X button
