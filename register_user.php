@@ -59,7 +59,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->bind_param("sss", $fullname, $email, $hashed_password);
 
             if ($stmt->execute()) {
-                $success = "Account created successfully! You can now log in.";
+                // ===== AUTO LOGIN AFTER REGISTRATION =====
+                $new_user_id = $stmt->insert_id;
+
+                // Set session variables (log them in automatically)
+                $_SESSION["userLoggedIn"] = true;
+                $_SESSION["userId"] = $new_user_id;
+                $_SESSION["userName"] = $fullname;
+                $_SESSION["userEmail"] = $email;
+
+                // Redirect to survey immediately
+                header("Location: survey.php");
+                exit();
             } else {
                 $error = "Error creating account. Please try again.";
             }
@@ -167,7 +178,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         .password-wrapper input {
             width: 100%;
-            padding-right: 45px; /* space for the eye icon */
+            padding-right: 45px;
         }
 
         .toggle-password {
@@ -202,10 +213,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
         <?php if (!empty($error)): ?>
             <div class="error-message"><?php echo htmlspecialchars($error); ?></div>
-        <?php endif; ?>
-
-        <?php if (!empty($success)): ?>
-            <div class="success-message"><?php echo htmlspecialchars($success); ?></div>
         <?php endif; ?>
 
         <form method="POST" action="register_user.php">
@@ -268,12 +275,12 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             const input = document.getElementById(inputId);
 
             if (input.type === "password") {
-                input.type = "text";           // Show password
-                btn.textContent = "🙈";         // Change icon to "hide"
+                input.type = "text";
+                btn.textContent = "🙈";
                 btn.title = "Hide Password";
             } else {
-                input.type = "password";        // Hide password
-                btn.textContent = "👁️";         // Change icon to "show"
+                input.type = "password";
+                btn.textContent = "👁️";
                 btn.title = "Show Password";
             }
         }
