@@ -159,6 +159,34 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         .logo-icon {
             font-size: 50px;
         }
+
+        /* ===== SHOW/HIDE PASSWORD STYLES ===== */
+        .password-wrapper {
+            position: relative;
+        }
+
+        .password-wrapper input {
+            width: 100%;
+            padding-right: 45px; /* space for the eye icon */
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #666;
+            padding: 5px;
+            outline: none;
+        }
+
+        .toggle-password:hover {
+            color: #e94560;
+        }
     </style>
 </head>
 <body>
@@ -204,14 +232,26 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </ul>
             </div>
 
+            <!-- Password with Show/Hide Toggle -->
             <div class="form-group">
                 <label>Password</label>
-                <input type="password" name="password" placeholder="Create password" required>
+                <div class="password-wrapper">
+                    <input type="password" id="password" name="password" placeholder="Create password" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword('password', this)" title="Show/Hide Password">
+                        👁️
+                    </button>
+                </div>
             </div>
 
+            <!-- Confirm Password with Show/Hide Toggle -->
             <div class="form-group">
                 <label>Confirm Password</label>
-                <input type="password" name="confirm_password" placeholder="Confirm password" required>
+                <div class="password-wrapper">
+                    <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm password" required>
+                    <button type="button" class="toggle-password" onclick="togglePassword('confirm_password', this)" title="Show/Hide Password">
+                        👁️
+                    </button>
+                </div>
             </div>
 
             <button type="submit" class="btn-register">Create Account</button>
@@ -221,5 +261,22 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             Already have an account? <a href="login_user.php">Log in here</a>
         </div>
     </div>
+
+    <!-- JavaScript for Show/Hide Password -->
+    <script>
+        function togglePassword(inputId, btn) {
+            const input = document.getElementById(inputId);
+
+            if (input.type === "password") {
+                input.type = "text";           // Show password
+                btn.textContent = "🙈";         // Change icon to "hide"
+                btn.title = "Hide Password";
+            } else {
+                input.type = "password";        // Hide password
+                btn.textContent = "👁️";         // Change icon to "show"
+                btn.title = "Show Password";
+            }
+        }
+    </script>
 </body>
 </html>
