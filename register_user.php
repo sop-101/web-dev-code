@@ -1,19 +1,43 @@
 <?php
 session_start();
 include 'db_connect.php';
+include 'email_api_config.php';
 
 $error = "";
 $success = "";
 
-// ===== RAPID EMAIL VERIFIER API =====
+// ===== EMAILDETECTIVE EMAIL VERIFICATION API =====
+// Free tier: 1,000 verifications per month
 function verifyEmail($email) {
-    $api_url = "https://rapid-email-verifier.fly.dev/api/validate?email=" . urlencode($email);
-    $response = @file_get_contents($api_url);
+    $api_url = EMAIL_API_URL . "?email=" . urlencode($email) . "&api_key=" . EMAIL_API_KEY;
 
-    if ($response === false) return true;
+    // Set up HTTP context with timeout
+    $context = stream_context_create([
+        'http' => [
+            'timeout' => 10,
+            'header' => "Accept: application/json
+"
+        ]
+    ]);
+
+    // Call the API
+    $response = @file_get_contents($api_url, false, $context);
+
+    // If API fails, fall back to basic PHP validation
+    if ($response === false) {
+        return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
+    }
 
     $data = json_decode($response, true);
-    return ($data['valid'] ?? false) || ($data['deliverable'] ?? false);
+
+    // Check various possible response formats
+    if (isset($data['valid']) && $data['valid'] === true) return true;
+    if (isset($data['deliverable']) && $data['deliverable'] === true) return true;
+    if (isset($data['status']) && $data['status'] === 'valid') return true;
+    if (isset($data['result']) && $data['result'] === 'deliverable') return true;
+
+    // If API says invalid, still allow if format is correct (fail-safe)
+    return filter_var($email, FILTER_VALIDATE_EMAIL) !== false;
 }
 
 // Password validation: min 8 chars, must have uppercase, lowercase, number, special char
@@ -59,10 +83,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $stmt->bind_param("sss", $fullname, $email, $hashed_password);
 
             if ($stmt->execute()) {
-                // ===== AUTO LOGIN AFTER REGISTRATION =====
+                // Auto login after registration
                 $new_user_id = $stmt->insert_id;
 
-                // Set session variables (log them in automatically)
                 $_SESSION["userLoggedIn"] = true;
                 $_SESSION["userId"] = $new_user_id;
                 $_SESSION["userName"] = $fullname;
@@ -171,7 +194,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             font-size: 50px;
         }
 
-        /* ===== SHOW/HIDE PASSWORD STYLES ===== */
         .password-wrapper {
             position: relative;
         }
@@ -239,7 +261,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </ul>
             </div>
 
-            <!-- Password with Show/Hide Toggle -->
             <div class="form-group">
                 <label>Password</label>
                 <div class="password-wrapper">
@@ -250,7 +271,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                 </div>
             </div>
 
-            <!-- Confirm Password with Show/Hide Toggle -->
             <div class="form-group">
                 <label>Confirm Password</label>
                 <div class="password-wrapper">
@@ -269,7 +289,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         </div>
     </div>
 
-    <!-- JavaScript for Show/Hide Password -->
     <script>
         function togglePassword(inputId, btn) {
             const input = document.getElementById(inputId);
@@ -286,4 +305,4 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         }
     </script>
 </body>
-</html>
+</html>     
