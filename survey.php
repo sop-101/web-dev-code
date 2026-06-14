@@ -14,11 +14,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $missing[] = $field;
         }
     }
-    
+
     if (!empty($missing)) {
         $error = "Missing required fields: " . implode(", ", $missing);
     } else {
-        function clean($data) {
+        function clean($data)
+        {
             return htmlspecialchars(trim($data ?? ''), ENT_QUOTES, 'UTF-8');
         }
 
@@ -56,11 +57,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             disability_details, medication, mungkahi
         ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-        $stmt->bind_param("sissssssssisssssss",
-            $buong_pangalan, $edad, $kasarian, $bilang_ng_pamilya, $address,
-            $sakunaStr, $kaalaman_panganib, $gobag, $emergency_contacts, $evacuation_ease,
-            $total_members, $family_head, $bp, $existing_illness, $disability,
-            $disability_details, $medication, $mungkahi
+        $stmt->bind_param(
+            "sissssssssisssssss",
+            $buong_pangalan,
+            $edad,
+            $kasarian,
+            $bilang_ng_pamilya,
+            $address,
+            $sakunaStr,
+            $kaalaman_panganib,
+            $gobag,
+            $emergency_contacts,
+            $evacuation_ease,
+            $total_members,
+            $family_head,
+            $bp,
+            $existing_illness,
+            $disability,
+            $disability_details,
+            $medication,
+            $mungkahi
         );
 
         if ($stmt->execute()) {
@@ -74,20 +90,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="tl">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Brgy 727 Disaster Preparedness Survey</title>
     <link rel="stylesheet" href="survey.css">
 </head>
+
 <body>
     <div class="container">
         <h1>Brgy 727 Disaster Preparedness Survey</h1>
-        
+
         <?php if ($success): ?>
             <div class="alert success"><?php echo $success; ?></div>
         <?php endif; ?>
-        
+
         <?php if ($error): ?>
             <div class="alert error"><?php echo $error; ?></div>
         <?php endif; ?>
@@ -221,4 +239,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </form>
     </div>
 </body>
+
 </html>
