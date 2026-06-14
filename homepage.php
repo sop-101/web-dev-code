@@ -24,7 +24,7 @@
 
         <!-- LOGIN BUTTON -->
         <div class="header-right">
-            <a href="login.html" class="login-btn"><b>LOG IN</b></a>
+            <a href="login.php" class="login-btn"><b>LOG IN</b></a>
         </div>
     </header>
 
