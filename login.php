@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     <!-- TOP HEADER BAR -->
     <div class="top-bar">
-        <div class="logo-circle">+</div>
+        <img src="images/HEALTH.PNG" class="logo-circle" alt="Health">
         <div class="brand">
             <span class="brand-name">BRGY 727</span>
             <span class="brand-sub">Health Campaign</span>
@@ -83,6 +83,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
                         <input type="password" id="password" name="password" placeholder="Enter your password" required>
                     </div>
                 </div>
+
 
                 <button type="submit" class="btn-login">Sign In</button>
             </form>
