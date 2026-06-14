@@ -1,8 +1,3 @@
-/* ============================================
-   BRGY 727 - Login Page CSS
-   100% Figma Replicate
-   ============================================ */
-
 * {
   margin: 0;
   padding: 0;
@@ -16,10 +11,6 @@ body {
   display: flex;
   flex-direction: column;
 }
-
-/* ============================================
-   TOP HEADER BAR
-   ============================================ */
 
 .top-bar {
   background: #2c3e50;
@@ -63,10 +54,6 @@ body {
   letter-spacing: 1.5px;
 }
 
-/* ============================================
-   PAGE CENTER WRAPPER
-   ============================================ */
-
 .page-wrapper {
   flex: 1;
   display: flex;
@@ -74,10 +61,6 @@ body {
   align-items: center;
   padding: 40px 16px;
 }
-
-/* ============================================
-   LOGIN CARD
-   ============================================ */
 
 .login-container {
   background: #f5f5f5;
@@ -103,10 +86,6 @@ body {
   margin-bottom: 28px;
 }
 
-/* ============================================
-   ERROR MESSAGE
-   ============================================ */
-
 .error-message {
   background: #fdecea;
   color: #c0392b;
@@ -117,10 +96,6 @@ body {
   margin-bottom: 18px;
   text-align: center;
 }
-
-/* ============================================
-   FORM GROUPS
-   ============================================ */
 
 .form-group {
   margin-bottom: 16px;
@@ -133,10 +108,6 @@ body {
   color: #444;
   margin-bottom: 6px;
 }
-
-/* ============================================
-   INPUT WRAPPER WITH ICON
-   ============================================ */
 
 .input-wrapper {
   position: relative;
@@ -176,9 +147,6 @@ body {
   box-shadow: 0 0 0 3px rgba(231, 76, 60, 0.10);
 }
 
-/* ============================================
-   SIGN IN BUTTON
-   ============================================ */
 
 .btn-login {
   width: 100%;
@@ -205,9 +173,6 @@ body {
   transform: scale(0.98);
 }
 
-/* ============================================
-   REGISTER LINK
-   ============================================ */
 
 .register-link {
   text-align: center;
@@ -226,9 +191,6 @@ body {
   color: #e74c3c;
 }
 
-/* ============================================
-   PRIVACY NOTICE
-   ============================================ */
 
 .privacy-notice {
   display: flex;
@@ -255,10 +217,6 @@ body {
 .privacy-notice strong {
   color: #888;
 }
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
 
 @media (max-width: 480px) {
   .login-container {
