@@ -4,13 +4,11 @@
   box-sizing: border-box;
 }
 
-
 body {
   font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
   color: #333;
   background-color: #f5f5f5;
 }
-
 
 .header {
   background-color: #2c3e50;
@@ -21,12 +19,10 @@ body {
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
 }
 
-
 .header-left {
   display: flex;
   align-items: center;
 }
-
 
 .logo-section {
   display: flex;
@@ -35,17 +31,15 @@ body {
   gap: 12px;
 }
 
-
 .logo-icon-img {
   width: 45px;
   height: 45px;
   border-radius: 50%;
-  object-fit: contain;        
+  object-fit: contain;
   background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
-  padding: 8px;              
-  display: block;            
+  padding: 8px;
+  display: block;
 }
-
 
 .logo-text h1 {
   font-size: 15px;
@@ -54,17 +48,14 @@ body {
   text-transform: uppercase;
 }
 
-
 .logo-text p {
   font-size: 11px;
   color: #bdc3c7;
 }
 
-
 .header-right {
   padding-right: 20px;
 }
-
 
 .login-btn {
   background-color: #e74c3c;
@@ -79,12 +70,10 @@ body {
   transition: 0.3s ease;
 }
 
-
 .login-btn:hover {
   background-color: transparent;
   color: #e74c3c;
 }
-
 
 .hero {
   height: 500px;
@@ -99,14 +88,12 @@ body {
   color: white;
 }
 
-
 .hero-content h1 {
   font-size: 48px;
   font-weight: 700;
   text-transform: uppercase;
   margin-bottom: 20px;
 }
-
 
 .hero-subtitle {
   font-size: 16px;
@@ -116,13 +103,40 @@ body {
   line-height: 1.6;
 }
 
+/* ============================================
+   SURVEY BUTTON (CENTERED IN HERO)
+   ============================================ */
+
+.hero-cta {
+  margin-top: 35px;
+  text-align: center;
+}
+
+.survey-btn {
+  display: inline-block;
+  background-color: #e67e22;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 14px 45px;
+  border-radius: 4px;
+  font-size: 15px;
+  font-weight: bold;
+  text-transform: uppercase;
+  border: 2px solid #e67e22;
+  transition: 0.3s ease;
+  letter-spacing: 0.5px;
+}
+
+.survey-btn:hover {
+  background-color: transparent;
+  color: #e67e22;
+}
 
 .hotline-footer {
   background-color: #3a3a3a;
   color: white;
   padding: 60px 20px;
 }
-
 
 .footer-container {
   max-width: 900px;
@@ -131,19 +145,16 @@ body {
   text-align: left;
 }
 
-
 .footer-title {
   font-size: 24px;
   margin-bottom: 20px;
 }
-
 
 .contact-item {
   font-size: 14px;
   margin-bottom: 8px;
   color: #d0d0d0;
 }
-
 
 .copyright-footer {
   background-color: #3a3a3a;
@@ -155,28 +166,23 @@ body {
   letter-spacing: 0.3px;
 }
 
-
 .copyright-footer p {
   margin: 0;
 }
-
 
 @media (max-width: 768px) {
   .hero-content h1 {
     font-size: 32px;
   }
 
-
   .header {
     height: auto;
     padding: 10px;
   }
 
-
   .logo-text h1 {
     font-size: 13px;
   }
-
 
   .footer-container {
     padding-left: 20px;

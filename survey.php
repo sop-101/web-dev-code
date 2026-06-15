@@ -1,243 +1,184 @@
 <?php
-session_start();
-include 'db_connect.php';
-
-$success = "";
-$error = "";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Validate required fields
-    $required = ['buong_pangalan', 'edad', 'kasarian', 'bilang_ng_pamilya', 'address'];
-    $missing = [];
-    foreach ($required as $field) {
-        if (empty($_POST[$field])) {
-            $missing[] = $field;
-        }
-    }
-
-    if (!empty($missing)) {
-        $error = "Missing required fields: " . implode(", ", $missing);
-    } else {
-        function clean($data)
-        {
-            return htmlspecialchars(trim($data ?? ''), ENT_QUOTES, 'UTF-8');
-        }
-
-        // Process checkboxes (sakuna)
-        $sakuna = [];
-        if (isset($_POST['sakuna']) && is_array($_POST['sakuna'])) {
-            $sakuna = $_POST['sakuna'];
-        }
-        $sakunaStr = implode(';', array_map('clean', $sakuna));
-
-        // Prepare all data
-        $buong_pangalan = clean($_POST['buong_pangalan']);
-        $edad = (int) $_POST['edad'];
-        $kasarian = clean($_POST['kasarian']);
-        $bilang_ng_pamilya = (int) $_POST['bilang_ng_pamilya'];
-        $address = clean($_POST['address']);
-        $kaalaman_panganib = clean($_POST['kaalaman_panganib'] ?? '');
-        $gobag = clean($_POST['gobag'] ?? '');
-        $emergency_contacts = clean($_POST['emergency_contacts'] ?? '');
-        $evacuation_ease = clean($_POST['evacuation_ease'] ?? '');
-        $total_members = (int) ($_POST['total_members'] ?? 0);
-        $family_head = clean($_POST['family_head'] ?? '');
-        $bp = clean($_POST['bp'] ?? '');
-        $existing_illness = clean($_POST['existing_illness'] ?? '');
-        $disability = clean($_POST['disability'] ?? '');
-        $disability_details = clean($_POST['disability_details'] ?? '');
-        $medication = clean($_POST['medication'] ?? '');
-        $mungkahi = clean($_POST['mungkahi'] ?? '');
-
-        // Insert into database
-        $stmt = $conn->prepare("INSERT INTO surveys (
-            buong_pangalan, edad, kasarian, bilang_ng_pamilya, address,
-            sakuna, kaalaman_panganib, gobag, emergency_contacts, evacuation_ease,
-            total_members, family_head, bp, existing_illness, disability,
-            disability_details, medication, mungkahi
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-
-        $stmt->bind_param(
-            "sissssssssisssssss",
-            $buong_pangalan,
-            $edad,
-            $kasarian,
-            $bilang_ng_pamilya,
-            $address,
-            $sakunaStr,
-            $kaalaman_panganib,
-            $gobag,
-            $emergency_contacts,
-            $evacuation_ease,
-            $total_members,
-            $family_head,
-            $bp,
-            $existing_illness,
-            $disability,
-            $disability_details,
-            $medication,
-            $mungkahi
-        );
-
-        if ($stmt->execute()) {
-            $success = "Survey saved successfully! Total surveys: " . $conn->query("SELECT COUNT(*) FROM surveys")->fetch_row()[0];
-        } else {
-            $error = "Database error: " . $stmt->error;
-        }
-        $stmt->close();
-    }
-}
+$basePath = dirname($_SERVER['PHP_SELF']);
 ?>
 <!DOCTYPE html>
 <html lang="tl">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Brgy 727 Disaster Preparedness Survey</title>
-    <link rel="stylesheet" href="survey.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pangkalahatang Pagsusuri sa Kalusugan - BRGY 727</title>
+    <link rel="stylesheet" href="<?php echo $basePath; ?>/survey.css">
 </head>
 
 <body>
-    <div class="container">
-        <h1>Brgy 727 Disaster Preparedness Survey</h1>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="header-left">
+            <div class="logo-section">
+                <img src="<?php echo $basePath; ?>/images/HEALTH.PNG" class="logo-icon-img" alt="Health">
+                <div class="logo-text">
+                    <h1>BRGY 727</h1>
+                    <p>HEALTH CAMPAIGN</p>
+                </div>
+            </div>
+        </div>
+    </header>
 
-        <?php if ($success): ?>
-            <div class="alert success"><?php echo $success; ?></div>
-        <?php endif; ?>
+    <!-- SURVEY FORM -->
+    <main class="survey-container">
+        <form action="submit_survey.php" method="POST" class="survey-form">
 
-        <?php if ($error): ?>
-            <div class="alert error"><?php echo $error; ?></div>
-        <?php endif; ?>
-
-        <form method="POST" action="survey.php">
-            <!-- Required Fields -->
-            <div class="form-group">
-                <label>Buong Pangalan *</label>
-                <input type="text" name="buong_pangalan" required>
+            <!-- TITLE SECTION -->
+            <div class="survey-header">
+                <h1>PANGKAHALATANG PAGSUSURI SA KALUSUGAN</h1>
+                <p class="disclaimer">
+                    PAALALA: Ang pagsusuri na ito ay ginawa para sa layuning pang-edukasyon at kamalayan lamang. Ang
+                    resulta ng survey ay hindi sa mga nakapag na medikal na pagsusuri at hindi dapat ituring na opisyal
+                    na diagnosis ng isang lisensyadong doktor.
+                </p>
             </div>
 
-            <div class="form-group">
-                <label>Edad *</label>
-                <input type="number" name="edad" required>
-            </div>
+            <!-- SECTION I: DIET AND HYDRATION -->
+            <div class="section">
+                <div class="section-title">I. DIET AND HYDRATION</div>
 
-            <div class="form-group">
-                <label>Kasarian *</label>
-                <select name="kasarian" required>
-                    <option value="">Pumili...</option>
-                    <option value="Lalaki">Lalaki</option>
-                    <option value="Babae">Babae</option>
-                </select>
-            </div>
+                <div class="question">
+                    <p class="question-text">Question 1: How many servings of fruits and vegetables do you consume on a
+                        typical day? (Note: 1 serving = 1 medium fruit or 1 cup of raw leafy greens)</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q1" value="5_or_more"> 5 or more
+                            servings</label>
+                        <label class="option"><input type="radio" name="q1" value="1_to_4"> 1 to 4 servings</label>
+                        <label class="option"><input type="radio" name="q1" value="none"> None</label>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label>Bilang ng Pamilya *</label>
-                <input type="number" name="bilang_ng_pamilya" required>
-            </div>
+                <div class="question">
+                    <p class="question-text">Question 2: How frequently do you consume sugar-sweetened beverages like
+                        sodas, sweet milk teas, energy drinks, or instant powdered juices?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q2" value="rarely"> Rarely, or less than once a
+                            week</label>
+                        <label class="option"><input type="radio" name="q2" value="few_times"> A few times over the span
+                            of a week</label>
+                        <label class="option"><input type="radio" name="q2" value="every_day"> Every single day</label>
+                    </div>
+                </div>
 
-            <div class="form-group">
-                <label>Address *</label>
-                <textarea name="address" required></textarea>
-            </div>
-
-            <!-- Sakuna (Checkboxes) -->
-            <div class="form-group">
-                <label>Mga Sakunang Naranasan (Pumili ng lahat na naaangkop)</label>
-                <div class="checkbox-group">
-                    <label><input type="checkbox" name="sakuna[]" value="bagyo"> Bagyo</label>
-                    <label><input type="checkbox" name="sakuna[]" value="baha"> Baha</label>
-                    <label><input type="checkbox" name="sakuna[]" value="lindol"> Lindol</label>
-                    <label><input type="checkbox" name="sakuna[]" value="sunog"> Sunog</label>
-                    <label><input type="checkbox" name="sakuna[]" value="landslide"> Landslide</label>
+                <div class="question">
+                    <p class="question-text">Question 3: How many glasses of plain water do you drink throughout the
+                        day? (Note: 1 glass = approx. 250mL)</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q3" value="8_or_more"> 8 glasses or more</label>
+                        <label class="option"><input type="radio" name="q3" value="4_to_7"> 4 to 7 glasses</label>
+                        <label class="option"><input type="radio" name="q3" value="3_or_less"> 3 glasses or
+                            fewer</label>
+                    </div>
                 </div>
             </div>
 
-            <!-- Yes/No Questions -->
-            <div class="form-group">
-                <label>May kaalaman sa mga panganib?</label>
-                <select name="kaalaman_panganib">
-                    <option value="">Pumili...</option>
-                    <option value="oo">Oo</option>
-                    <option value="hindi">Hindi</option>
-                </select>
+            <!-- SECTION II: DAILY LIFESTYLE AND HABIT -->
+            <div class="section">
+                <div class="section-title">II. DAILY LIFESTYLE AND HABIT</div>
+
+                <div class="question">
+                    <p class="question-text">Question 4: On average, how many days a week do you do at least 30 minutes
+                        of moderate-intensity physical activity (such as brisk walking, sweeping, or bicycling)?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q4" value="5_or_more"> 5 or more days</label>
+                        <label class="option"><input type="radio" name="q4" value="1_to_4"> 1 to 4 days</label>
+                        <label class="option"><input type="radio" name="q4" value="none"> 0 days / None</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">Question 5: How many hours of restful sleep do you manage to get on an
+                        average night?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q5" value="7_to_9"> 7 to 9 hours</label>
+                        <label class="option"><input type="radio" name="q5" value="6_to_10"> 6 to 10 or more
+                            hours</label>
+                        <label class="option"><input type="radio" name="q5" value="fewer_6"> Fewer than 6 hours</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">Question 6: Outside of your primary job or school duties, how many hours a
+                        day do you spend sitting down looking at screens (TV, mobile phone, or computer)?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q6" value="less_2"> Less than 2 hours</label>
+                        <label class="option"><input type="radio" name="q6" value="2_to_4"> 2 to 4 hours</label>
+                        <label class="option"><input type="radio" name="q6" value="more_4"> More than 4 hours</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">Question 7: Do you currently use any tobacco products, traditional
+                        cigarettes, or e-cigarettes/vapes?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q7" value="never"> No, I have never smoked or
+                            used them / I quit completely</label>
+                        <label class="option"><input type="radio" name="q7" value="sometimes"> Sometimes / I smoke
+                            occasionally or am currently trying to cut back</label>
+                        <label class="option"><input type="radio" name="q7" value="daily"> Yes, I use tobacco or vape
+                            products on a daily basis</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">Question 8: How often do you consume alcoholic beverages?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q8" value="never"> Never / Rarely (Less than
+                            once a month)</label>
+                        <label class="option"><input type="radio" name="q8" value="moderately"> Moderately (1 to 2
+                            standard drinks a week)</label>
+                        <label class="option"><input type="radio" name="q8" value="frequently"> Frequently / Heavily
+                            (Multiple times a week or regular heavy drinking sessions)</label>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>May Go Bag?</label>
-                <select name="gobag">
-                    <option value="">Pumili...</option>
-                    <option value="oo">Oo</option>
-                    <option value="hindi">Hindi</option>
-                </select>
+            <!-- SECTION III: MENTAL AND PREVENTIVE HEALTH -->
+            <div class="section">
+                <div class="section-title">III. MENTAL AND PREVENTIVE HEALTH</div>
+
+                <div class="question">
+                    <p class="question-text">Question 9: Over the past two weeks, how often have you been bothered by
+                        feeling down, depressed, or hopeless, or having little interest or pleasure in doing things?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q9" value="not_at_all"> Not at all /
+                            Seldom</label>
+                        <label class="option"><input type="radio" name="q9" value="several_days"> Several days across
+                            the week</label>
+                        <label class="option"><input type="radio" name="q9" value="nearly_every"> Nearly every single
+                            day</label>
+                    </div>
+                </div>
+
+                <div class="question">
+                    <p class="question-text">Question 10: When was the last time you had standard health metrics (such
+                        as your blood pressure, weight, or blood sugar) checked by a nurse or doctor?</p>
+                    <div class="options">
+                        <label class="option"><input type="radio" name="q10" value="past_year"> Within the past
+                            year</label>
+                        <label class="option"><input type="radio" name="q10" value="1_to_2_years"> 1 to 2 years
+                            ago</label>
+                        <label class="option"><input type="radio" name="q10" value="more_2_years"> More than 2 years ago
+                            / Never</label>
+                    </div>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label>May Emergency Contacts?</label>
-                <select name="emergency_contacts">
-                    <option value="">Pumili...</option>
-                    <option value="oo">Oo</option>
-                    <option value="hindi">Hindi</option>
-                </select>
+            <!-- BUTTONS -->
+            <div class="button-group">
+                <button type="submit" class="btn btn-submit">Submit</button>
+                <a href="<?php echo $basePath; ?>/homepage.php" class="btn btn-home">Go back Home</a>
+                <button type="reset" class="btn btn-clear">Clear</button>
             </div>
 
-            <div class="form-group">
-                <label>Madali makalabas sa evacuation?</label>
-                <select name="evacuation_ease">
-                    <option value="">Pumili...</option>
-                    <option value="oo">Oo</option>
-                    <option value="hindi">Hindi</option>
-                </select>
-            </div>
-
-            <!-- Health Info -->
-            <div class="form-group">
-                <label>Total Members</label>
-                <input type="number" name="total_members">
-            </div>
-
-            <div class="form-group">
-                <label>Family Head</label>
-                <input type="text" name="family_head">
-            </div>
-
-            <div class="form-group">
-                <label>BP</label>
-                <input type="text" name="bp">
-            </div>
-
-            <div class="form-group">
-                <label>Existing Illness</label>
-                <textarea name="existing_illness"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>May Disability?</label>
-                <select name="disability">
-                    <option value="">Pumili...</option>
-                    <option value="oo">Oo</option>
-                    <option value="hindi">Hindi</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label>Disability Details</label>
-                <textarea name="disability_details"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Medication</label>
-                <textarea name="medication"></textarea>
-            </div>
-
-            <div class="form-group">
-                <label>Mungkahi</label>
-                <textarea name="mungkahi"></textarea>
-            </div>
-
-            <button type="submit" class="btn-submit">Isumite ang Survey</button>
         </form>
-    </div>
+    </main>
 </body>
 
 </html>
